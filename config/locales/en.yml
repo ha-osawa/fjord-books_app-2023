@@ -1,14 +1,14 @@
 en:
   activerecord:
     models:
-      book: Book  #g
+      book: Book
 
     attributes:
       book:
-        author: Author  #g
-        memo: Memo  #g
-        picture: Picture  #g
-        title: Title  #g
+        author: Author
+        memo: Memo
+        picture: Picture
+        title: Title
 
     head:
       title: BooksApp

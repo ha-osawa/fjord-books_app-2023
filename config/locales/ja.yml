@@ -1,14 +1,14 @@
 ja:
   activerecord:
     models:
-      book: 本  #g
+      book: 本
 
     attributes:
       book:
-        author: 著者  #g
-        memo: メモ  #g
-        picture: 写真  #g
-        title: タイトル  #g
+        author: 著者
+        memo: メモ
+        picture: 写真
+        title: タイトル
 
     head:
       title: 本のメモアプリ
