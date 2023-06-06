@@ -30,10 +30,12 @@ ja:
       create: 本を作成する
       update: 内容を変更する
 
-  books:
+  flash:
+    item: 本
+
     create:
-      notice: 本の作成に成功しました
+      notice: "%{item}の作成に成功しました"
     update:
-      notice: 本の更新に成功しました
+      notice: "%{item}の更新に成功しました"
     destroy:
-      notice: 本の削除に成功しました
+      notice: "%{item}の削除に成功しました"

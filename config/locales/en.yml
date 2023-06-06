@@ -30,10 +30,12 @@ en:
       create: Create Book
       update: Update Book
 
-  books:
+  flash:
+    item: Book
+    
     create:
-      notice: Book was successfully created.
+      notice: "%{item} was successfully created."
     update:
-      notice: Book was successfully updated.
+      notice: "%{item} was successfully updated."
     destroy:
-      notice: Book was successfully destroyed.
+      notice: "%{item} was successfully destroyed."
