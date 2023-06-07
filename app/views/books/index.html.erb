@@ -2,9 +2,9 @@
 
 <h1><%= t("activerecord.h1.books") %></h1>
 
-<div id="books" class="index-items">
+<div id="books">
   <% @books.each do |book| %>
-    <div class="index-item">
+    <div>
       <%= render book %>
       <p>
         <%= link_to t("activerecord.link.show"), book %>
@@ -13,6 +13,6 @@
   <% end %>
 </div>
 
-<nav class="page-nav">
+<nav>
   <%= link_to t("activerecord.link.new"), new_book_path %>
 </nav>
