@@ -37,8 +37,6 @@ ja:
       update: 内容を変更する
 
   flash:
-    item: 本
-
     create:
       notice: "%{item}の作成に成功しました"
     update:

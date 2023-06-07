@@ -36,9 +36,7 @@ en:
       create: Create Book
       update: Update Book
 
-  flash:
-    item: Book
-    
+  flash:    
     create:
       notice: "%{item} was successfully created."
     update:
