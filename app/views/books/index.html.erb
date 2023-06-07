@@ -1,18 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<h1><%= t("activerecord.h1.books") %></h1>
+<h1><%= t(".h1") %></h1>
 
 <div id="books">
   <% @books.each do |book| %>
     <div>
       <%= render book %>
       <p>
-        <%= link_to t("activerecord.link.show"), book %>
+        <%= link_to t("books.link.show"), book %>
       </p>
     </div>
   <% end %>
 </div>
 
 <nav>
-  <%= link_to t("activerecord.link.new"), new_book_path %>
+  <%= link_to t("books.link.new"), new_book_path %>
 </nav>

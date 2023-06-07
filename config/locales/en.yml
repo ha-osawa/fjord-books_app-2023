@@ -10,20 +10,26 @@ en:
         picture: Picture
         title: Title
 
-    head:
+  layouts:
+    application:
       title: BooksApp
 
-    h1:
-      books: Books
-      new: New Book
-      edit: Editing book
+  books:
+    index:
+      h1: Books
+
+    new:
+      h1: New Book
+
+    edit:
+      h1: Editing book
 
     link:
-      show: Show this book
       new: New book
+      show: Show this book
       edit: Edit this book
-      back: Back to books
       destroy: Destroy this book
+      back: Back to books
 
   helpers:
     submit:

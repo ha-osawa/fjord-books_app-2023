@@ -10,20 +10,26 @@ ja:
         picture: 写真
         title: タイトル
 
-    head:
+  layouts:
+    application:
       title: 本のメモアプリ
 
-    h1:
-      books: 本の一覧
-      new: 新規作成
-      edit: 内容の変更
+  books:
+    index:
+      h1: 本の一覧
+
+    new:
+      h1: 新規作成
+
+    edit:
+      h1: 内容の変更
 
     link:
-      show: 詳細を見る
       new: 新規作成する
+      show: 詳細を見る
       edit: 内容を変更する
-      back: 一覧に戻る
       destroy: この本を削除する
+      back: 一覧に戻る
 
   helpers:
     submit:
