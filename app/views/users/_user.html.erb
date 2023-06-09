@@ -1,0 +1,27 @@
+<div>
+  <p>
+    <strong>name:</strong>
+    <%= user.name %>
+  </p>
+
+  <p>
+    <strong>e-mail:</strong>
+    <%= user.email %>
+  </p>
+
+  <p>
+    <strong>zipcode:</strong>
+    <%= user.zipcode.present? ? user.zipcode : 'unregistered' %>
+  </p>
+
+  <p>
+    <strong>address:</strong>
+    <%= user.address.present? ? user.address : 'unregistered' %>
+  </p>
+
+  <p>
+    <strong>introduction text:</strong>
+    <%= user.introduction_text.present? ? user.zipcode : 'unregistered' %>
+  </p>
+
+</div>
