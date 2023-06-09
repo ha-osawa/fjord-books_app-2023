@@ -1,14 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Books</h1>
+<h1><%= t(".h1") %></h1>
 
 <div id="books">
   <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-      <%= link_to "Show this book", book %>
-    </p>
+    <div>
+      <%= render book %>
+      <p>
+        <%= link_to t("books.link.show"), book %>
+      </p>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New book", new_book_path %>
+<nav>
+  <%= link_to t("books.link.new"), new_book_path %>
+</nav>
