@@ -5,12 +5,12 @@
   <% @users.each do |user| %>
     <div class="index-item">
       <%= render user %>
-      <p> 
-      <%= link_to t('views.common.show', name: User.model_name.human), user %> <br/>
-      <%= link_to(t('views.common.edit', name: User.model_name.human), edit_user_registration_path) if user == current_user %> 
+      <p>
+        <%= link_to t('views.common.show', name: User.model_name.human), user %> <br />
+        <%= link_to t('views.common.edit', name: User.model_name.human), edit_user_registration_path if user == current_user %>
       </p>
     </div>
   <% end %>
 </div>
 
-<%= paginate @users%>
+<%= paginate @users %>
