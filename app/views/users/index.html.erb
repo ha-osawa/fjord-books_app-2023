@@ -1,13 +1,13 @@
 <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %>
-<h1>Users</h1>
+<h1><%= t('views.common.title_index', name: User.model_name.human) %></h1>
 
 <div class="index-items">
   <% @users.each do |user| %>
     <div class="index-item">
       <%= render user %>
       <p> 
-      <%= link_to 'show this user', user %> <br/>
-      <%= link_to('edit my account', edit_user_registration_path) if user == current_user %> 
+      <%= link_to t('views.common.show', name: User.model_name.human), user %> <br/>
+      <%= link_to(t('views.common.edit', name: User.model_name.human), edit_user_registration_path) if user == current_user %> 
       </p>
     </div>
   <% end %>

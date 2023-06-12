@@ -1,27 +1,27 @@
 <div>
   <p>
-    <strong>name:</strong>
+    <strong><%= User.human_attribute_name(:name) %>:</strong>
     <%= user.name %>
   </p>
 
   <p>
-    <strong>e-mail:</strong>
+    <strong><%= User.human_attribute_name(:email) %>:</strong>
     <%= user.email %>
   </p>
 
   <p>
-    <strong>zipcode:</strong>
-    <%= user.zipcode.present? ? user.zipcode : 'unregistered' %>
+    <strong><%= User.human_attribute_name(:zipcode) %>:</strong>
+    <%= user.zipcode.present? ? user.zipcode : t('.unregisterd') %>
   </p>
 
   <p>
-    <strong>address:</strong>
-    <%= user.address.present? ? user.address : 'unregistered' %>
+    <strong><%= User.human_attribute_name(:address) %>:</strong>
+    <%= user.address.present? ? user.address : t('.unregisterd') %>
   </p>
 
   <p>
-    <strong>introduction text:</strong>
-    <%= user.introduction_text.present? ? user.introduction_text : 'unregistered' %>
+    <strong><%= User.human_attribute_name(:introduction_text) %>:</strong>
+    <%= user.introduction_text.present? ? user.introduction_text : t('.unregisterd') %>
   </p>
 
 </div>

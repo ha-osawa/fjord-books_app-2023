@@ -1,6 +1,6 @@
 <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %> | 
-<%= link_to 'Back to users', users_path %>
-<p><%= link_to 'Edit my account', edit_user_registration_path if @user == current_user%></p>
+<%= link_to t('views.common.back', name: User.model_name.human), users_path %>
+<p><%= link_to t('views.common.edit', name: User.model_name.human), edit_user_registration_path if @user == current_user%></p>
 
 <div class="show-item">
 <%= render @user %>
