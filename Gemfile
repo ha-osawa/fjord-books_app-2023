@@ -80,9 +80,9 @@ group :test do
   gem 'webdrivers'
 end
 
+gem 'active_storage_validations'
 gem 'carrierwave'
 gem 'devise'
 gem 'devise-i18n'
-gem 'kaminari'
 gem 'image_processing', '>= 1.2'
-gem 'active_storage_validations'
+gem 'kaminari'
