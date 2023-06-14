@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[ show edit update destroy ]
+  before_action :ensure_user, only: %i[ edit update destroy ]
 
   # GET /reports or /reports.json
   def index
@@ -66,5 +67,11 @@ class ReportsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def report_params
       params.require(:report).permit(:title, :content)
+    end
+
+    def ensure_user
+      @current_user_reports = current_user.reports
+      @target_report = @current_user_reports.find_by(id: params[:id])
+      redirect_to report_path(params[:id]), alert: 'You can only edit your own reports.' unless @target_report
     end
 end
