@@ -1,5 +1,14 @@
 <div id="<%= dom_id report %>">
   <p>
+    <strong>Author:</strong>
+    <% if User.find(report.user_id).name.present? %>
+      <%= User.find(report.user_id).name %>
+    <% else %>
+      <%= User.find(report.user_id).email %>
+    <% end %>
+  </p>
+
+  <p>
     <strong>Title:</strong>
     <%= report.title %>
   </p>
