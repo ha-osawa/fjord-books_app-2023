@@ -207,6 +207,7 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+      edit_destroy_restriction: "編集・削除できるのは、自分で作成した%{name}のみです"
   layouts:
     application:
       menu: メニュー
