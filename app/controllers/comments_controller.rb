@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :ensure_user, only: %i[destroy]
 
@@ -13,11 +15,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    unless @target_comment
-      return redirect_to @commentable, alert: t('controllers.common.edit_destroy_restriction', name: Comment.model_name.human)
-    end
+    return redirect_to @commentable, alert: t('controllers.common.edit_destroy_restriction', name: Comment.model_name.human) unless @target_comment
+
     @commentable.comments.find(params[:id]).destroy
-    redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human) 
+    redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
 
   private
