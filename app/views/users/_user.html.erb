@@ -11,17 +11,17 @@
 
   <p>
     <strong><%= User.human_attribute_name(:zipcode) %>:</strong>
-    <%= user.zipcode.present? ? user.zipcode : t('.unregisterd') %>
+    <%= user.zipcode.presence || t('.unregisterd') %>
   </p>
 
   <p>
     <strong><%= User.human_attribute_name(:address) %>:</strong>
-    <%= user.address.present? ? user.address : t('.unregisterd') %>
+    <%= user.address.presence || t('.unregisterd') %>
   </p>
 
   <p>
     <strong><%= User.human_attribute_name(:introduction_text) %>:</strong>
-    <%= user.introduction_text.present? ? user.introduction_text : t('.unregisterd') %>
+    <%= user.introduction_text.presence || t('.unregisterd') %>
   </p>
 
 </div>
