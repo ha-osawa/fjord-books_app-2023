@@ -13,7 +13,7 @@
   <body class="<%= params[:action] %>">
     <%= tag.p(notice, style: "color: green", class: "notice") if notice.present? %>
     <%= tag.p(alert, style: "color: red", class: "alert") if alert.present? %>
-    
+
     <% if user_signed_in? %>
       <p><%= t('.signing_in', name: current_user.name) %></p>
       <p><%= link_to t('.logout'), destroy_user_session_path, data: { turbo_method: :DELETE } %></p>
