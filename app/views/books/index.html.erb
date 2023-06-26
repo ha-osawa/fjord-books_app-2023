@@ -1,4 +1,5 @@
-<p style="color: green"><%= notice %></p>
+<%= link_to t('views.common.title_index', name: User.model_name.human), users_path %></p> |
+<%= link_to t('views.common.edit', name: User.model_name.human), edit_user_registration_path %>
 
 <h1><%= t('views.common.title_index', name: i18n_pluralize(Book.model_name.human)) %></h1>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BooksApp</title>
+    <title><%= t('.title') %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,17 @@
   </head>
 
   <body class="<%= params[:action] %>">
+    <% if notice.present? %>
+      <p class="notice" style="color:green;"><%= notice %></p>
+    <% end %>
+    <% if alert.present? %>
+      <p class="alert" style="color:red;"><%= alert %></p>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <p><%= t('.signing_in', name: current_user.name) %></p>
+      <p><%= link_to t('.logout'), destroy_user_session_path, data: { turbo_method: :DELETE } %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
