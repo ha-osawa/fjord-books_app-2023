@@ -1,6 +1,11 @@
 <div id="<%= dom_id user %>">
 
   <p>
+    <strong><%= User.human_attribute_name(:icon) %>:</strong>
+    <%= image_tag user.icon.variant(resize_to_fit: [80,80]) if user.icon.attached? %>
+  </p>
+
+  <p>
     <strong><%= User.human_attribute_name(:email) %>:</strong>
     <%= user.email %>
   </p>
