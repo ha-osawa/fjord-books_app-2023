@@ -19,4 +19,12 @@
     <%= l report.created_on %>
   </p>
 
+  <% if report.mentioned_reports.present? %>
+    <ul>
+      <% report.mentioned_reports.each do |mentioned_report| %>
+        <li><%= link_to mentioned_report.title, report_path(mentioned_report) %>からリンク</li>
+      <% end %>
+    </ul>
+  <% end %>
+
 </div>
