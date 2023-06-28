@@ -18,10 +18,12 @@ class ReportsController < ApplicationController
 
   def edit; end
 
-  def create
+  def create                                                               # TODO:トランザクションの実装 
     @report = current_user.reports.new(report_params)
-
     if @report.save
+      if @report.mentioning?
+        @report.create_mentioning_reports
+      end
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
@@ -30,6 +32,9 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update(report_params)
+      if @report.mentioning?
+        @report.update_mantioning_reports
+      end
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
       render :edit, status: :unprocessable_entity
