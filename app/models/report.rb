@@ -27,22 +27,42 @@ class Report < ApplicationRecord
   end
 
   def extract_mentioning_report_id
-    uris = content.scan(/http:\/\/localhost:3000\/reports\/[0-9]+/).map do |uri|
-      URI.parse(uri).path.match(/[^\/reports\/][0-9]*/).to_s
+    content.scan(/http:\/\/localhost:3000\/reports\/[0-9]+/).map do |uri|
+      URI.parse(uri).path.match(/[^\/reports\/][0-9]*/).to_s.to_i
     end
   end
 
   def create_mentioning_reports
     self.extract_mentioning_report_id.each do |mentioning_id|
-      self.mentionings.create(mentioning_report_id: mentioning_id)
+      self.mentionings.create!(mentioning_report_id: mentioning_id)
     end
   end
 
   def update_mantioning_reports
+    update_mentioning_report_ids = self.extract_mentioning_report_id - self.mentionings.pluck(:mentioning_report_id)
     self.mentionings.where.not(mentioning_report_id: self.extract_mentioning_report_id ).destroy_all
-    self.extract_mentioning_report_id.each do |mentioning_id|
-      self.mentionings.create_or_find_by(mentioning_report_id: mentioning_id)
+    update_mentioning_report_ids.each do |mentioning_id|
+      self.mentionings.create_or_find_by!(mentioning_report_id: mentioning_id)
     end
   end
 
+  def execute_create_transaction
+    ActiveRecord::Base.transaction do
+      self.save!
+      self.create_mentioning_reports if self.mentioning?
+    end
+    true
+    rescue ActiveRecord::RecordInvalid
+      false
+  end
+
+  def execute_update_transaction(report_params)
+    ActiveRecord::Base.transaction do
+      self.update!(report_params)
+      self.update_mantioning_reports if self.mentioning?
+    end
+    true
+    rescue ActiveRecord::RecordInvalid
+      false
+  end
 end
