@@ -22,7 +22,7 @@
   <% if report.mentioned_reports.present? %>
     <ul>
       <% report.mentioned_reports.each do |mentioned_report| %>
-        <li><%= link_to mentioned_report.title, report_path(mentioned_report) %>からリンク</li>
+        <li><%= link_to t('.mentioned', name: mentioned_report.title), report_path(mentioned_report) %></li>
       <% end %>
     </ul>
   <% end %>

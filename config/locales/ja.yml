@@ -221,3 +221,6 @@ ja:
     registrations:
       edit:
         title: "アカウント編集"
+  reports:
+    report:
+      mentioned: "%{name}からリンク"
