@@ -1,0 +1,17 @@
+<h1><%= t('views.common.title_show', name: Report.model_name.human) %></h1>
+
+<div class="show-item">
+  <%= render partial: 'reports/report', locals: {report: @report} %>
+</div>
+
+<nav class="page-nav">
+  <%= link_to t('views.common.edit', name: Report.model_name.human.downcase), edit_report_path(@report) if current_user.id == @report.user_id %> |
+  <%= link_to t('views.common.back', name: i18n_pluralize(Report.model_name.human.downcase)), reports_path %>
+  <%= button_to t('views.common.destroy', name: Report.model_name.human.downcase), @report, method: :delete if current_user.id == @report.user_id %>
+</nav>
+
+<h2><%= Comment.model_name.human %></h2>
+<%= render(partial: 'comments/comment', locals: {commentable: @report}, collection: @comments, as: 'comment') || t('views.common.nothing', name: Comment.model_name.human ) %>
+
+<h1><%= t('views.common.title_new', name: Comment.model_name.human) %></h1>
+<%= render 'comments/form', commentable: @report, comment: @comment %>

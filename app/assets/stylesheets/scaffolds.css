@@ -319,3 +319,23 @@ form input[type="submit"] {
 form input[type="submit"]:hover {
   background-color: var(--global-primary-c-hover);
 }
+
+/****************
+Comment
+****************/
+
+.comment-item {
+  max-width: var(--single-column-w);
+  display: block;
+  border: solid var(--global-bw) var(--global-bc);
+  padding: 24px;
+  border-radius: var(--global-br);
+  font-size: var(--global-fz-md);
+  line-height: var(--global-lh);
+  margin-bottom: 2em;
+}
+
+.comment-item button {
+  display: block;
+  margin-left: auto;
+}

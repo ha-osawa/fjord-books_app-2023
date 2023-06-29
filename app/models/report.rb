@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class Book < ApplicationRecord
+class Report < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
-  mount_uploader :picture, PictureUploader
+  belongs_to :user
+  validates :user_id, { presence: true }
 end
