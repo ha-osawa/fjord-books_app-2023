@@ -21,30 +21,6 @@ class Report < ApplicationRecord
     created_at.to_date
   end
 
-  def mentioning?
-    content.match?(%r{http://localhost:3000/reports/[0-9]+}) || mentionings
-  end
-
-  def extract_mentioning_report_ids
-    content.scan(%r{http://localhost:3000/reports/[0-9]+}).map do |uri|
-      URI.parse(uri).path.match(%r{[^/reports/][0-9]*}).to_s.to_i
-    end
-  end
-
-  def create_mentioning_reports
-    extract_mentioning_report_ids.map do |mentioning_id|
-      mentionings.new(mentioning_report_id: mentioning_id)
-    end
-  end
-
-  def update_mentioning_reports
-    update_mentioning_report_ids = extract_mentioning_report_ids - mentionings.pluck(:mentioning_report_id)
-    mentionings.where.not(mentioning_report_id: extract_mentioning_report_ids).destroy_all
-    update_mentioning_report_ids.map do |mentioning_id|
-      mentionings.new(mentioning_report_id: mentioning_id)
-    end
-  end
-
   def save_mentions
     ActiveRecord::Base.transaction do
       raise ActiveRecord::Rollback unless save
@@ -67,5 +43,31 @@ class Report < ApplicationRecord
       end
       true
     end
+  end
+end
+
+private
+
+def mentioning?
+  content.match?(%r{http://localhost:3000/reports/[0-9]+}) || mentionings
+end
+
+def extract_mentioning_report_ids
+  content.scan(%r{http://localhost:3000/reports/[0-9]+}).map do |uri|
+    URI.parse(uri).path.match(%r{[^/reports/][0-9]*}).to_s.to_i
+  end
+end
+
+def create_mentioning_reports
+  extract_mentioning_report_ids.map do |mentioning_id|
+    mentionings.new(mentioning_report_id: mentioning_id)
+  end
+end
+
+def update_mentioning_reports
+  update_mentioning_report_ids = extract_mentioning_report_ids - mentionings.pluck(:mentioning_report_id)
+  mentionings.where.not(mentioning_report_id: extract_mentioning_report_ids).destroy_all
+  update_mentioning_report_ids.map do |mentioning_id|
+    mentionings.new(mentioning_report_id: mentioning_id)
   end
 end
