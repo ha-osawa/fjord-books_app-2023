@@ -24,8 +24,9 @@ class Report < ApplicationRecord
   def save_mentions
     ActiveRecord::Base.transaction do
       raise ActiveRecord::Rollback unless save
+
       if mentioning?
-        create_mentioning_reports.each do | mentioning_report |
+        create_mentioning_reports.each do |mentioning_report|
           raise ActiveRecord::Rollback unless mentioning_report.save
         end
       end
@@ -36,8 +37,9 @@ class Report < ApplicationRecord
   def update_mentions(report_params)
     ActiveRecord::Base.transaction do
       raise ActiveRecord::Rollback unless update(report_params)
+
       if mentioning?
-        update_mentioning_reports.each do | mentioning_report |
+        update_mentioning_reports.each do |mentioning_report|
           raise ActiveRecord::Rollback unless mentioning_report.save
         end
       end
