@@ -49,7 +49,7 @@ end
 private
 
 def mentioning?
-  content.match?(%r{http://localhost:3000/reports/[0-9]+}) || mentionings
+  content.match?(%r{http://localhost:3000/reports/[0-9]+}) || mentionings.exists?
 end
 
 def extract_mentioning_report_ids
