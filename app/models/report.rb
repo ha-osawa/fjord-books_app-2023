@@ -45,7 +45,7 @@ class Report < ApplicationRecord
     end
   end
 
-  def execute_create_transaction
+  def save_mentions
     ActiveRecord::Base.transaction do
       raise ActiveRecord::Rollback unless save
       if mentioning?
@@ -57,7 +57,7 @@ class Report < ApplicationRecord
     end
   end
 
-  def execute_update_transaction(report_params)
+  def update_mentions(report_params)
     ActiveRecord::Base.transaction do
       raise ActiveRecord::Rollback unless update(report_params)
       if mentioning?
