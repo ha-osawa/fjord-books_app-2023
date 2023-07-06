@@ -25,43 +25,47 @@ class Report < ApplicationRecord
     content.match?(%r{http://localhost:3000/reports/[0-9]+}) || mentionings
   end
 
-  def extract_mentioning_report_id
+  def extract_mentioning_report_ids
     content.scan(%r{http://localhost:3000/reports/[0-9]+}).map do |uri|
       URI.parse(uri).path.match(%r{[^/reports/][0-9]*}).to_s.to_i
     end
   end
 
   def create_mentioning_reports
-    extract_mentioning_report_id.each do |mentioning_id|
-      mentionings.create!(mentioning_report_id: mentioning_id)
+    extract_mentioning_report_ids.map do |mentioning_id|
+      mentionings.new(mentioning_report_id: mentioning_id)
     end
   end
 
-  def update_mantioning_reports
-    update_mentioning_report_ids = extract_mentioning_report_id - mentionings.pluck(:mentioning_report_id)
-    mentionings.where.not(mentioning_report_id: extract_mentioning_report_id).destroy_all
-    update_mentioning_report_ids.each do |mentioning_id|
-      mentionings.create_or_find_by!(mentioning_report_id: mentioning_id)
+  def update_mentioning_reports
+    update_mentioning_report_ids = extract_mentioning_report_ids - mentionings.pluck(:mentioning_report_id)
+    mentionings.where.not(mentioning_report_id: extract_mentioning_report_ids).destroy_all
+    update_mentioning_report_ids.map do |mentioning_id|
+      mentionings.new(mentioning_report_id: mentioning_id)
     end
   end
 
   def execute_create_transaction
     ActiveRecord::Base.transaction do
-      save!
-      create_mentioning_reports if mentioning?
+      raise ActiveRecord::Rollback unless save
+      if mentioning?
+        create_mentioning_reports.each do | mentioning_report |
+          raise ActiveRecord::Rollback unless mentioning_report.save
+        end
+      end
+      true
     end
-    true
-  rescue ActiveRecord::RecordInvalid
-    false
   end
 
   def execute_update_transaction(report_params)
     ActiveRecord::Base.transaction do
-      update!(report_params)
-      update_mantioning_reports if mentioning?
+      raise ActiveRecord::Rollback unless update(report_params)
+      if mentioning?
+        update_mentioning_reports.each do | mentioning_report |
+          raise ActiveRecord::Rollback unless mentioning_report.save
+        end
+      end
+      true
     end
-    true
-  rescue ActiveRecord::RecordInvalid
-    false
   end
 end
